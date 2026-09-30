@@ -63,6 +63,8 @@ project:
         - file: 03-Breathing-induced_artifacts.md
         - file: 04-Undersampling.md
         - file: 05-Fast_GRE_sequence.md
+        - file: notebooks/gre-artefacts.ipynb
+          hidden: true
 
   toc:
     - file: index.md
