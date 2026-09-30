@@ -11,8 +11,8 @@ Acquiring all $k_y$ lines is time-consuming. Accelerated MRI does not acquired a
 
 ## Mask design
 We use a standard cartesian undersampling mask along the phase readout $(k_y)$ direction {cite:p}`Griswold2002`:
-- **Central k-space lines are always acquired:** they carry ~90% of the image energy and cannot be sacrificed. There are essential for stable reconstruction. They are called Autoalibration Signal (ACS)
-- **Outer lines are randomly subsampled** at rate $1/R$ introduces incoherent aliasing
+- Central k-space lines are always acquired: they carry ~90% of the image energy and cannot be sacrificed. There are essential for stable reconstruction. They are called Autoalibration Signal (ACS)
+- Outer lines are randomly subsampled at rate $1/R$ introduces incoherent aliasing
 
 ### Effect
 Zeroing out k-space lines creates aliasing artifacts in the reconstructed image only correctable with knowledge of the acquisition geometry ([](#undersampling)).

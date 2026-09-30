@@ -23,17 +23,13 @@ project:
   # Hover any of these in the rendered text to see the expansion.
   abbreviations:
     MRI: Magnetic resonance imaging
-    MR: Magnetic resonance
     TR: Repetition Time
     TE: Echo Time
-    FA: Flip Angle
     FOV: Field of view
     PE: Phase encode
     RO: Readout
     FFT: Fast Fourier Transform
-    DFT: Discrete Fourier Transform
-    SNR: Signal-to-noise ratio
-    CSF: Cerebrospinal fluid
+    IFFT: Inverse Fast Fourier Transform
 
   bibliography:
     - bibliography/references.bib
@@ -78,8 +74,6 @@ project:
     # `hidden: true` keeps it built and referenceable without publishing it as a
     # chapter of its own, so the reader gets the figure in context rather than a
     # second copy next to a page of source code.
-    - file: notebooks/figure-demo.ipynb
-      hidden: true
     - file: notebooks/gre-artefacts.ipynb
       hidden: true
 

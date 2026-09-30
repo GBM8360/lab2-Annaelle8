@@ -11,16 +11,8 @@ This book simulates the most common sources of artifacts directly in k-space, in
 - breathing-induced motion: modelled as a periodic translation driven by a realistic respiratory signal;
 - undersampling: used in accelerated MRI to shorten the acquisition.
 
-Accelerated MRI is an active research topic: it reduces scan time and therefore the
-opportunity for motion, but it introduces artifacts of its own. The last part of the
-book combines all three effects to show how they interact.
+Accelerated MRI is an active research topic: it reduces scan time and therefore the opportunity for motion, but it introduces artifacts of its own. The last part of the book combines all three effects to show how they interact.
 
-Every figure is interactive: move the sliders to change the motion amplitude, the
-breathing rate, the rotation angle or the acceleration factor, and see the effect on
-k-space and on the reconstructed image.
+Every figure is interactive: move the sliders to change the rotation angle, the motion amplitude, the breathing rate, or the acceleration factor, and see the effect on k-space and on the reconstructed image.
 
-:::{note}
-Built with [MyST Markdown](https://mystmd.org): Markdown for the prose, Jupyter
-notebooks for the computation, one `myst.yml` for the configuration, and a GitHub
-Action that rebuilds and republishes on every push.
-:::
+> Built with [MyST Markdown](https://mystmd.org): Markdown for the prose, Jupyter notebooks for the computation, one `myst.yml` for the configuration, and a GitHub Action that rebuilds and republishes on every push.

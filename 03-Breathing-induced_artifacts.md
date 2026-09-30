@@ -9,11 +9,9 @@ kernelspec:
 
 In cartesian gradient echo (GRE) imaging, k-space is filled one $k_y$ line per TR. An image with $N_{ky}$ phase-encoding lines therefore takes about $N_{ky} \cdot TR$ seconds to acquire. 
 
-> Example: with $N_{ky} = 256$ and $TR = 50$ ms, the acquisition time is approximatively 13 s.
-
 The patient keeps breathing during this time, so successive $k_y$ lines are acquired at different moments of the respiratory cycle. During the respiratory cycle the anatomy move due to the expansion of the lungs, also created $B_0$ field inhomogenities.
 
-The reconstruction assumes that every line describes the same object. When inconsistencies between lines appear as the object at a slightly different positions, it introduces **motion ghosting** artifacts in the reconstructed image.
+The reconstruction assumes that every line describes the same object. When inconsistencies between lines appear as the object at a slightly different positions, it introduces motion ghosting artifacts in the reconstructed image.
 
 ## MRI acquisition simulation
 
@@ -48,19 +46,13 @@ A spatial shift of $d$ pixels in the image domain along $y$ is equivalent to a l
 
 $$ \mathcal{F}\{I(x, y - d)\}(k_x, k_y) = \mathcal{F}\{I\}(k_x, k_y)\, e^{-i 2\pi k_y d} $$ (eqShift)
 
-This property allows us to simulate motion efficiently without shifting the image for each $k_y$ line an recomputing a 2D FFT for each k-space line. Instead of shifting the image repeatedly, we:
+This property allows us to simulate motion efficiently without shifting the image for each $k_y$ line an recomputing a 2D FFT for each k-space line. Instead of shifting the image repeatedly, we apply a line-dependent phase ramp in k-space and perform a single inverse FFT.
 
-1. Compute a single 2D FFT of the image
-2. Apply a line-dependent phase ramp in k-space
-3. Perform a single inverse FFT
-
-The resulting k-space has a different phase on each line, which, after iFFT, produces
-the characteristic **ghosting artifacts** seen in motion-corrupted MRI.
-
+The resulting k-space has a different phase on each line, which, after IFFT, produces the characteristic ghosting artifacts seen in motion-corrupted MRI.
 
 ## Breathing-induced artifacts simulation
 
-The figure [](#respiration) below applies the model to a real k-space. The top panel shows the simulated respiratory displacement, with one dot per acquired $k_y$ line. The bottom panels show the k-space magnitude, then the magnitude and phase of the reconstructed image. As predicted by [](#eqShift), the k-space magnitude does not change when the sliders move: all the corruption lives in the phase.
+The figure [](#respiration) below applies the model at the reference k-space.
 
 :::{figure} #figRespiration
 :label: respiration
@@ -77,8 +69,8 @@ they vary from one line to the next, the stronger the ghosts.
 
 :::{tip} Things to try
 - Set $A = 0$ to see the reference image, then increase it. The ghosts become more
-  intense, but they stay concertrate inside the brain approximatively at the same positions.
-- Keep $A$ fixed and change $f$. The ghosts move, following [](#eqGhostPosition).
+  intense, but they stay concertrate inside the brain approximatively at the same position.
+- Keep $A$ fixed and change $f$. The ghosts move in the PE direction, following [](#eqGhostPosition).
 :::
 
 
@@ -89,40 +81,26 @@ sinusoidal breathing pattern of rate $f$ and amplitude $A$,
 $d(t) = A \sin(2\pi f t)$. Using the Jacobi–Anger expansion, the phase factor applied
 to each line becomes
 
-$$
-e^{-i 2\pi k_y A \sin(2\pi f t_n)}
-= \sum_{m=-\infty}^{+\infty} J_m(2\pi k_y A)\, e^{-i 2\pi m f t_n}
-$$ (eqJacobiAnger)
+$$ e^{-i 2\pi k_y A \sin(2\pi f t_n)} = \sum_{m=-\infty}^{+\infty} J_m(2\pi k_y A)\, e^{-i 2\pi m f t_n} $$ (eqJacobiAnger)
 
-where $J_m$ is the Bessel function of the first kind of order $m$. Since $t_n$ grows
-linearly with the line index, each term $e^{-i 2\pi m f t_n}$ is a linear phase ramp
-along $k_y$. By the shift theorem, it produces a copy of the object translated along
-$y$. The $m$-th ghost is displaced by
+where $J_m$ is the Bessel function of the first kind of order $m$. 
 
-$$
-\Delta y_m = m \cdot f \cdot N_y \cdot TR = m \cdot f \cdot T_{\text{acq}} \quad \text{(pixels, modulo } N_y\text{)}
-$$ (eqGhostPosition)
+Since $t_n$ grows linearly with the line index, each term $e^{-i 2\pi m f t_n}$ is a linear phase ramp along $k_y$. By the shift theorem, it produces a copy of the object translated along $y$. The intensity of the ghosts is governed by $J_m(2\pi k_y A)$, which grows with the amplitude $A$.
 
-In words, the ghost spacing equals the **number of respiratory cycles** during the
-acquisition. The intensity of the ghosts is governed by $J_m(2\pi k_y A)$, which grows
-with the amplitude $A$.
+This relation summarise the physics of the figure below:
 
-These two relations summarise the physics of the figure below:
+- the amplitude $A$ sets how much intense leaks into the ghosts;
+- the respiratory rate $f$ and the acquisition time $t_n$ set where
+  the ghosts appear.
 
-- the **amplitude** $A$ sets how much energy leaks into the ghosts;
-- the **respiratory rate** $f$ and the acquisition time $T_{\text{acq}}$ set where
-  the ghosts appear. Faster breathing, or a longer scan, pushes them further from the
-  object. Because the image is periodic, ghosts beyond the field of view wrap around.
-
-A real respiratory trace is not a perfect sinusoid, so its ghosts are less sharply
-defined. It still behaves the same way on average.
+A real respiratory trace is not a perfect sinusoid, so its ghosts are less sharply defined but still behaves the same way on average.
 
 ## Limitations
 
 This model captures the main mechanism of breathing ghosts, but it simplifies reality
 in several ways:
 
-- **Rigid translation and n-plane motion only.** The whole image moves as one block. In vivo, the chest and
+- **Rigid translation and in-plane motion only.** The whole image moves as one block. In vivo, the chest and
   abdomen move much more than the other tissues. Especially true for the brain which further from the lungs than the spinal cord for instance not mooving just B_0 field inhomogenities.
 - **No field changes.** Breathing also changes the magnetic field $B_0$, because air in the lungs has a different magnetic susceptibility from tissue.
   These fluctuations add a phase error to each line, even when the tissus (brain or spinal cord) itself barely moves. In spinal cord imaging they are a major source of respiratory artifacts {cite:p}`Verma2014`, and could be added to this model as an extra phase term per line.

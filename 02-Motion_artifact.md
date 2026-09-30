@@ -16,7 +16,7 @@ Motion can involve rotations and translations along different axes. These moveme
 
 A rotation of the object in the image domain results in a corresponding rotation of its k-space representation by the same angle.
 
-Therefore, if the patient’s head rotates during the acquisition, the k-space lines acquired before and after the movement correspond to different head positions. Combining these lines produces a k-space that is no longer consistent with a single object configuration [](#headMotion).
+Therefore, if the patient’s head rotates during the acquisition, the k-space lines acquired before and after the movement correspond to different head positions. Combining these lines produces a k-space that is no longer consistent with the initial object configuration [](#headMotion).
 
 :::{figure} #figHeadMotion
 :label: headMotion
@@ -35,13 +35,13 @@ The motion also affects the phase image. Because k-space data are complex-valued
 
 To illustrate this effect, we simulate an abrupt in-plane rotation during the acquisition.
 
-At a given point during the acquisition, the kspace is rotated by an angle $\theta$, by multiplying each sample real and imaginary part by this angle. The final k-space is computing by keeping the k-space lines acquired before the motion from the original head position, while the lines acquired after the motion are replaced by the corresponding lines from the rotated position.
+At a given point during the acquisition, the kspace is rotated by an angle $\theta$, by multiplying each sample real and imaginary part by this angle. The final k-space is computing by keeping the k-space lines acquired before the motion from the original head position, while the lines acquired after the motion are replaced by the corresponding lines from the rotated position kspace.
 
 The resulting k-space therefore contains data acquired from two different head positions.
 
-Finally, an inverse Fourier transform is applied to this modified k-space to reconstruct the image.
+Finally, an IFFT is applied to this modified k-space to reconstruct the image.
 
 
 :::{note}
-This simulation uses an abrupt rotation and a simplified k-space acquisition order. Real MRI motion artifacts depend on the sequence, trajectory, phase-encoding order, motion amplitude, and timing, and can therefore produce different artifact patterns and the patient can moove several time during on acquisition with differnet angle.
+This simulation uses an abrupt rotation. Real MRI motion artifacts can be different because the patient can move several time during on acquisition with differnet angle.
 :::
