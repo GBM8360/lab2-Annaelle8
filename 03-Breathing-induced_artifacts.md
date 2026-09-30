@@ -70,6 +70,11 @@ magnitude and reconstructed phase. The sliders set the motion amplitude $A$ and 
 respiratory rate $f$.
 :::
 
+:::{tip} Reading the figure
+The top plot shows the simulated respiratory displacement (in pixels) over time. Each black dot is one acquired $k_y$ line, placed at the displacement the anatomy had when that line was acquired. The spread of the dots is what corrupts the image: the more
+they vary from one line to the next, the stronger the ghosts.
+:::
+
 :::{tip} Things to try
 - Set $A = 0$ to see the reference image, then increase it. The ghosts become more
   intense, but they stay concertrate inside the brain approximatively at the same positions.

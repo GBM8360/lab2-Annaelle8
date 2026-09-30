@@ -22,6 +22,10 @@ Zeroing out k-space lines creates aliasing artifacts in the reconstructed image 
 Undersampling by a factor of $R$ = 1, 2, 4 ou 8 with a full acquuired center (ACS), reconstructed by zero-filling.
 :::
 
+:::{tip} Reading the figure
+There is no motion here, so the top plot only shows the acquired $k_y$ lines as black dots along the time axis. As $R$ increases, fewer lines are acquired and the dots stop earlier: the acquisition time is shorter, you can see its value above the top plot. On the k-space, the missing lines appear as black rows, while the central band (ACS) is always fully sampled.
+:::
+
 The k-space was downsampled by a factor $R$ in the phase encoding direction by keeping every $R$ k-space line. This increases the sampling interval ${\Delta k}$ in that direction. Since $FOV = \frac{1}{\Delta k}$, the FOV is reduced by a factor $R$ in the downsampled direction. However, $k_{max}$ remains unchanged, so the spatial resolution is preserved. The magnitude image has therefore a smaller FOV with aliasing artefact (wrap-around). The resulting magnitude and phase images show aliasing artifacts due to the undersampling k-space
 
 ## Reconstruction

@@ -15,6 +15,10 @@ In practice, these effects do not occur in isolation. During a single MRI acquis
 Combined simulation of respiratory motion, abrupt head rotation, and k-space undersampling. Each slider controls one of the effects independently. The parameter grids are smaller than in the previous figures because all combinations are precomputed.
 :::
 
+:::{tip} Reading the figure
+The top plot shows both motions at once: breathing displacement (solid line, in pixels) and head rotation (dotted line, in degrees). The black dots mark the acquired $k_y$ lines. Increase $R$ and see the dots stop earlier: we have a shorter acquisition time, so we samples less of the motion but at the cost of aliasing.
+:::
+
 When several sources of corruption are combined, their effects appear simultaneously in the reconstructed image. For example, respiratory motion can introduce motion-related artifacts, head rotation can produce ghosting or spatial inconsistencies, and undersampling can produce aliasing artifacts. The resulting image can therefore contain several interacting artifact patterns.
 
 This illustrates the complexity of an MRI acquisition: image quality depends not only on the imaging sequence and acquisition parameters, but also on the patient’s motion and the way k-space is sampled.
