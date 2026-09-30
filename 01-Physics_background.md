@@ -32,7 +32,11 @@ $$ I(x,y) = \iint K(k_x,k_y) \,e^{i2\pi(k_xx+k_yy)} \,dk_x\,dk_y $$ (eqIFFT)
 
 These two domains contain the exact same information, there just represented in different ways [](#eqFourierlink):
 
-$$ \boxed{ I(x,y) \;\xleftrightarrow[\mathcal{F}^{-1}]{\mathcal{F}}\; K(k_x,k_y)} $$ (eqFourierlink)
+```{math}
+:label: eqFourierLink
+:typst: I(x, y) quad stretch(arrow.l.r)^cal(F)_(cal(F)^(-1)) quad K(k_x, k_y)
+\boxed{I(x, y) \;\xleftrightarrow[\mathcal{F}^{-1}]{\mathcal{F}}\; K(k_x, k_y)}
+```
 
 ::: {note} Fast Fourier Transform
 In practice, MRI acquires a **finite set of discrete samples** in k-space. Numerical reconstruction therefore uses the **2D Fast Fourier Transform (FFT)** and its inverse (IFFT).
