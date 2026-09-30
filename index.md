@@ -5,9 +5,23 @@ description: An interactive book built with MyST
 
 ## About this book
 
-Respiratory motion during MRI acquisition introduces artifacts in k-space that degrade image quality. This is particularly critical for brain and spinal cord imaging. This book aim to simulate different artifacts as motion corruption, rotation and breathing-induced motion corruption directly in k-space for accelerated MRI. Indeed, accelerated MRI is oine of the resarche subject in MRI field but comes also with it's proper artifact. This book aim to simulate alle this type of artifact and see how they interect togather.
+Patient motion during an MRI acquisition corrupts k-space and degrades image quality.
+This is particularly critical in brain and spinal cord imaging, where the structures of
+interest are small.
 
-Rather than working in image space, the model operates on complex k-space data (real + imaginary channels), which is more faithful to the actual acquisition process and allows correction before reconstruction.
+This book simulates the most common sources of artifacts directly in k-space, in a cartesian gradient echo (GRE) acquisition:
+
+- rigid head motion: modelled as an in-plane rotation occurring during the scan;
+- breathing-induced motion: modelled as a periodic translation driven by a realistic respiratory signal;
+- undersampling: used in accelerated MRI to shorten the acquisition.
+
+Accelerated MRI is an active research topic: it reduces scan time and therefore the
+opportunity for motion, but it introduces artifacts of its own. The last part of the
+book combines all three effects to show how they interact.
+
+Every figure is interactive: move the sliders to change the motion amplitude, the
+breathing rate, the rotation angle or the acceleration factor, and see the effect on
+k-space and on the reconstructed image.
 
 :::{note}
 Built with [MyST Markdown](https://mystmd.org): Markdown for the prose, Jupyter
