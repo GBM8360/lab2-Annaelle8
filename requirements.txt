@@ -25,3 +25,4 @@ kaleido>=1.4
 # Add whatever your own content needs, e.g.:
 # scipy
 # nibabel
+neurokit2
