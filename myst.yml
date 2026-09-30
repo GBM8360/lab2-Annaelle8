@@ -2,17 +2,17 @@
 version: 1
 project:
   # TODO: make this yours
-  title: 'My MyST Book'
+  title: MRI breathing-induced artifacts & accelerated imaging
   subtitle: An interactive book built with MyST
   # TODO: add yourself. This is the same author schema a real MOOC contribution uses.
   authors:
-    - name: Your Name
+    - name: Annaelle Sarrazin
       affiliations:
         - Polytechnique Montréal
   copyright: '2026'
   license: CC-BY-4.0
   open_access: true
-  date: 2026-09-16
+  date: 2026-10-01
   keywords:
     - MRI
     - education
@@ -58,19 +58,27 @@ project:
       # a duplicate of the figure. Add new chapters here as well as in `toc`.
       articles:
         - file: index.md
-        - file: 01-getting-started.md
-        - file: 02-interactive-figures.md
+        - file: 01-Physics_background.md
+        - file: 02-Motion_artifact.md
+        - file: 03-Breathing-induced_artifacts.md
+        - file: 04-Undersampling.md
+        - file: 05-Fast_GRE_sequence.md
 
   toc:
     - file: index.md
-    - file: 01-getting-started.md
-    - file: 02-interactive-figures.md
+    - file: 01-Physics_background.md
+    - file: 02-Motion_artifact.md
+    - file: 03-Breathing-induced_artifacts.md
+    - file: 04-Undersampling.md
+    - file: 05-Fast_GRE_sequence.md
     # Notebooks must appear in the toc for MyST to build (and execute) them --
     # otherwise `:::{figure} #label` has nothing to embed and silently renders empty.
     # `hidden: true` keeps it built and referenceable without publishing it as a
     # chapter of its own, so the reader gets the figure in context rather than a
     # second copy next to a page of source code.
     - file: notebooks/figure-demo.ipynb
+      hidden: true
+    - file: notebooks/gre-artefacts.ipynb
       hidden: true
 
 site:
