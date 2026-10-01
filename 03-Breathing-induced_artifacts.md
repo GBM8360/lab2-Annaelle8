@@ -70,7 +70,7 @@ they vary from one line to the next, the stronger the ghosts.
 :::{tip} Things to try
 - Set $A = 0$ to see the reference image, then increase it. The ghosts become more
   intense, but they stay concertrate inside the brain approximatively at the same position.
-- Keep $A$ fixed and change $f$. The ghosts move in the PE direction, following [](#eqGhostPosition).
+- Keep $A$ fixed and change $f$. The ghosts move in the PE direction.
 :::
 
 
@@ -90,8 +90,7 @@ Since $t_n$ grows linearly with the line index, each term $e^{-i 2\pi m f t_n}$ 
 This relation summarise the physics of the figure below:
 
 - the amplitude $A$ sets how much intense leaks into the ghosts;
-- the respiratory rate $f$ and the acquisition time $t_n$ set where
-  the ghosts appear.
+- the respiratory rate $f$ and the acquisition time $t_n$ set where the ghosts appear.
 
 A real respiratory trace is not a perfect sinusoid, so its ghosts are less sharply defined but still behaves the same way on average.
 
